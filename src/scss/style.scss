@@ -1,0 +1,18 @@
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+@import '/node_modules/@fontsource/oxanium/400.css';
+@import '/node_modules/@fontsource/oxanium/500.css';
+@import '/node_modules/@fontsource/oxanium/600.css';
+@import '/node_modules/@fontsource/oxanium/700.css';
+
+body {
+  font-family: 'Oxanium', system-ui;
+}
+
+.border-2-black{
+  border: 2px solid black;
+}
+
+.circle{
+  border-radius: 50%;
+}
