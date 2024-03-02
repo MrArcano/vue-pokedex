@@ -32,6 +32,8 @@ export default {
       pokeId: "",
       pokeSprites: {},
       pokeStats: [],
+      pokeList: [],
+      stateBtn: "",
     };
   },
   methods: {
@@ -46,6 +48,7 @@ export default {
           this.pokeName = response.data.name;
           this.pokeSprites = response.data.sprites;
           this.pokeStats = response.data.stats;
+          this.checkList();
         })
         .catch((error) => {
           // handle error
@@ -56,9 +59,30 @@ export default {
           this.pokeStats = [];
         });
     },
+
+    checkList(){
+      if(this.pokeList.includes(this.pokeName)){
+        this.stateBtn = 'Delete';
+        return true;
+      }else{
+        this.stateBtn = 'Save';
+        return false;
+      }
+    },
+
+    editList(){
+      if(this.checkList()){
+        this.pokeList = this.pokeList.filter(item => item !== this.pokeName);
+      }else{
+        this.pokeList.push(this.pokeName);
+      }
+      localStorage.setItem('pokeList', this.pokeList);
+      this.checkList();
+    }
   },
   mounted() {
-    // this.getPokemon(1);
+    this.getPokemon(1);
+    this.pokeList = localStorage.getItem('pokeList').split(',') ?? [];
   },
 };
 </script>
@@ -68,7 +92,7 @@ export default {
     <!-- LEFT -->
     <div class="poke-left-shadow border-2-black">
       <div class="poke-left border-2-black">
-        <PokeLTop />
+        <PokeLTop @editPokeList="editList" :stateBtn="stateBtn" />
 
         <div class="poke-container border-2-black">
           <PokeDisplay
@@ -85,7 +109,7 @@ export default {
     <!-- RIGHT -->
     <div class="poke-right">
       <PokeRTop />
-      <PokeBox @startSearch="getPokemon" />
+      <PokeBox @startSearch="getPokemon" :pokeList="pokeList" />
     </div>
   </div>
 </template>

@@ -16,3 +16,24 @@ body {
 .circle{
   border-radius: 50%;
 }
+
+.btn-csm {
+  border: 2px solid #000;
+  border-radius: 0.5vw;
+  font-weight: 600;
+  color: white;
+  background-color: #444;
+  box-shadow: -2px 3px 0 #222, -4px 6px 0 #000;
+  font-size: 1.6vw;
+}
+
+.btn-csm:active {
+  transform: scale(0.95);
+}
+
+/* Styles for screens above 1000px */
+@media only screen and (min-width: 1000px) {
+  .btn-csm {
+    font-size: 16px;
+  }
+}

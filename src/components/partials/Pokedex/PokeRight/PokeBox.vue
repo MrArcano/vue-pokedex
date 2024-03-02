@@ -1,6 +1,9 @@
 <script>
 export default {
   name: "PokeBox",
+  props:{
+    pokeList: Array,
+  },
   methods: {
     sendStartSearch(event){
       const testoElemento = event.currentTarget.querySelector('span').textContent;
@@ -16,8 +19,8 @@ export default {
       <div class="poke-saved-list border-2-black">
         <p class="text-center">Saved Pokemon</p>
         <ul>
-          <li @click="sendStartSearch">
-            <img src="/pokeball.png" alt="li-poke" /><span>bulbasaur</span>
+          <li v-for="poke,index in pokeList" :key="index" @click="sendStartSearch">
+            <img src="/pokeball.png" alt="li-poke" /><span>{{ poke }}</span>
           </li>
         </ul>
       </div>
@@ -76,6 +79,9 @@ export default {
           color: white;
           text-shadow: 0 0 8px #000;
           cursor: pointer;
+          img{
+            filter: invert(1);
+          }
         }
       }
     }

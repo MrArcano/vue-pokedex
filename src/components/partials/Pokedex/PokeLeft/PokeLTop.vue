@@ -1,6 +1,9 @@
 <script>
 export default {
   name: "PokeTop",
+  props: {
+    stateBtn: String,
+  }
 };
 </script>
 
@@ -48,6 +51,10 @@ export default {
         <div class="lightgreen-container circle light-circle"></div>
         <div class="darkgreen-container circle dark-circle"></div>
       </div>
+    </div>
+
+    <div v-if="stateBtn" class="poke-save">
+      <button @click="$emit('editPokeList')" class="btn-csm">{{ stateBtn }}</button>
     </div>
   </div>
 </template>
@@ -255,4 +262,14 @@ export default {
   background-color: var(--darkgreen-color);
 }
 // -------------------------------------------
+
+.poke-save{
+  position: absolute;
+  bottom: 2%;
+  right: 16%;
+  .btn-csm{
+    width: 100%;
+    padding: 0.1vw 2vw;
+  }
+}
 </style>
