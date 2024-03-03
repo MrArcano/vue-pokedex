@@ -34,6 +34,7 @@ export default {
       pokeStats: [],
       pokeList: [],
       stateBtn: "",
+      pokeObj: {},
     };
   },
   methods: {
@@ -48,6 +49,12 @@ export default {
           this.pokeName = response.data.name;
           this.pokeSprites = response.data.sprites;
           this.pokeStats = response.data.stats;
+
+          this.pokeObj = {
+            id: this.pokeId,
+            name: this.pokeName,
+          }
+          
           this.checkList();
         })
         .catch((error) => {
@@ -61,7 +68,7 @@ export default {
     },
 
     checkList(){
-      if(this.pokeList.includes(this.pokeName)){
+      if(this.pokeList.some(pokemon => pokemon.name === this.pokeName)){
         this.stateBtn = 'Delete';
         return true;
       }else{
@@ -72,17 +79,17 @@ export default {
 
     editList(){
       if(this.checkList()){
-        this.pokeList = this.pokeList.filter(item => item !== this.pokeName);
+        this.pokeList = this.pokeList.filter(item => item.name !== this.pokeName);
       }else{
-        this.pokeList.push(this.pokeName);
+        this.pokeList.push(this.pokeObj);
       }
-      localStorage.setItem('pokeList', this.pokeList);
+      localStorage.setItem('pokeList', JSON.stringify(this.pokeList));
       this.checkList();
     }
   },
   mounted() {
     this.getPokemon(1);
-    this.pokeList = localStorage.getItem('pokeList').split(',') ?? [];
+    this.pokeList = JSON.parse(localStorage.getItem('pokeList')) || [];
   },
 };
 </script>

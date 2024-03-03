@@ -9,7 +9,7 @@ export default {
   methods: {
     sendStartSearch(){
       if(this.value !== ''){
-        this.$emit('startSearch',this.value);
+        this.$emit('startSearch',this.value.toLowerCase());
         this.value = '';
       }
     }

@@ -31,6 +31,14 @@ body {
   transform: scale(0.95);
 }
 
+.btn-csm.disabled{
+  cursor: default;
+  opacity: 25%;
+  &:active{
+    transform: scale(1);
+  }
+}
+
 /* Styles for screens above 1000px */
 @media only screen and (min-width: 1000px) {
   .btn-csm {
