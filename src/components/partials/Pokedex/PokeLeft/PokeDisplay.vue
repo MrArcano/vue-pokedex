@@ -4,6 +4,31 @@ export default {
   props:{
     pokeData: Object,
   },
+  methods: {
+    changePoke(direction){
+      let idSearch = 1;
+      if(this.pokeData.name !== 'Not Found!'){
+        if(direction === 'next'){
+          idSearch = this.pokeData.id + 1;
+        }
+        if(direction === 'prev'){
+          idSearch = this.pokeData.id - 1;
+        }
+      }
+
+      if(idSearch === 1026){
+        idSearch = 10001;
+      }
+
+      if(idSearch > 0){
+        this.$emit('startSearch',idSearch);
+      }
+    },
+
+    ImageError(event){
+      event.target.src = '/question-mark.png';
+    }
+  },
   computed: {
     getImage(){
       if(Object.keys(this.pokeData.sprites).length !== 0){
@@ -20,21 +45,25 @@ export default {
       <div class="poke-display-shadow path-display">
         <div class="poke-display-border path-display">
           <div class="poke-display path-display">
-            <div class="poke-screw">
-              <div class="screw border-2-black"></div>
-              <div class="screw border-2-black"></div>
+            <div class="poke-display-top">
+              <button @click="changePoke('prev')" class="btn-csm">&laquo;</button>
+              <div class="poke-screw">
+                <div class="screw border-2-black"></div>
+                <div class="screw border-2-black"></div>
+              </div>
+              <button @click="changePoke('next')" class="btn-csm">&raquo;</button>
             </div>
             <div class="poke-bg-image border-2-black">
               <div class="poke-image">
-                <img
-                  :src="getImage" alt="Pokémon"
+                <img :title="pokeData.name"
+                  :src="getImage" @error="ImageError" alt="Pokémon"
                 />
               </div>
             </div>
             <h1 class="poke-data">
               <span class="poke-number">{{ pokeData.id }}</span>
               <span> - </span>
-              <span class="poke-name">{{ pokeData.name }}</span>
+              <span class="poke-name" :title="pokeData.name" >{{ pokeData.name }}</span>
             </h1>
           </div>
         </div>
@@ -76,16 +105,32 @@ export default {
   position: relative;
 }
 // -------------------------------------------
+.poke-display-top{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 14%;
+  width: 80%;
+  margin: 0 auto;
+
+  button{
+    padding: 0 0.4vw;
+    line-height: 100%;
+    box-shadow: none;
+  }
+}
+
 .poke-screw {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 14%;
+  width: 80%;
   gap: 5%;
 }
 
 .screw {
-  width: 4%;
+  width: 5%;
   aspect-ratio: 1/1;
   background-color: var(--main-background-color);
   border-radius: 50%;

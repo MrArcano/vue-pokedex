@@ -43,7 +43,6 @@ export default {
         .get(`https://pokeapi.co/api/v2/pokemon/${value}`)
         .then((response) => {
           // handle success
-          console.log(response.data);
 
           this.pokeId = response.data.id;
           this.pokeName = response.data.name;
@@ -59,7 +58,6 @@ export default {
         })
         .catch((error) => {
           // handle error
-          console.log(error);
           this.pokeId = "?";
           this.pokeName = "Not Found!";
           this.pokeSprites = {};
@@ -102,9 +100,7 @@ export default {
         <PokeLTop @editPokeList="editList" :stateBtn="stateBtn" />
 
         <div class="poke-container border-2-black">
-          <PokeDisplay
-            :pokeData="{ id: pokeId, name: pokeName, sprites: pokeSprites }"
-          />
+          <PokeDisplay :pokeData="{ id: pokeId, name: pokeName, sprites: pokeSprites }" @startSearch="getPokemon" />
           <PokeSearch @startSearch="getPokemon" />
           <PokeStats :pokeStats="pokeStats" />
         </div>

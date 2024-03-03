@@ -30,7 +30,19 @@ export default {
         }
       }
       
-    }
+    },
+
+    getImage(index){
+      return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index}.png`
+    },
+
+    getName(item){
+      return item ? item.name : '';
+    },
+
+    ImageError(event){
+      event.target.src = '/question-mark.png';
+    },
   },
   computed: {
     displayedItems() {
@@ -39,7 +51,7 @@ export default {
       this.pokeList.sort((a, b) => a.id - b.id);
       const newArray = this.pokeList.slice(start, end);
       return newArray;
-    }
+    },
   },
 };
 </script>
@@ -51,13 +63,13 @@ export default {
         <div class="d-flex justify-content-around  align-items-center">
           <button @click="changeView('prev')" class="btn-csm" :class="{ 'disabled': currentIndex === 0 }">Prev</button>
           <p class="text-center">Saved Pokemon</p>
-          <button @click="changeView('next')" class="btn-csm" :class="{ 'disabled': currentIndex + itemsPerPage >= pokeList.length }">Next</button>
+          <button @click="changeView('next')" class="btn-csm" :class="{'disabled': currentIndex + itemsPerPage >= pokeList.length }">Next</button>
         </div>
 
         <div class="box-container">
-          <div v-for="index in 20" :key="index" @click="sendStartSearch(displayedItems[index-1] ? displayedItems[index-1].name : '')" class="box-item">
+          <div v-for="index in 20" :key="index" @click="sendStartSearch(getName(displayedItems[index-1]))" :title="getName(displayedItems[index-1])" class="box-item">
             <img class="img-fluid opacity-25" src="/pokeball.png" alt="li-poke" />
-            <img v-if="index <= displayedItems.length" class="img-fluid" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${displayedItems[index-1].id}.png`" :alt="displayedItems[index-1].name">
+            <img v-if="index <= displayedItems.length" class="img-fluid" :src="getImage(displayedItems[index-1].id)" @error="ImageError" :alt="displayedItems[index-1].name">
           </div>
         </div>
 
