@@ -1,7 +1,18 @@
-# Vue 3 + Vite
+## Funzionalità principali
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+🔎 Ricerca Pokemon: Grazie alle API di PokeAPI, la mia web app permette di cercare Pokemon in modo facile e veloce.
 
-## Recommended IDE Setup
+🖼️ Dettagli del Pokemon: Una volta trovato il Pokemon desiderato, è possibile visualizzarne tutti i dettagli in modo dettagliato e coinvolgente.
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+📸 Cattura Pokemon: La funzionalità più divertente! Quando trovo un Pokemon che mi colpisce particolarmente, posso catturarlo e salvarlo nel mio Pokedex personale.
+
+🗑️ Gestione del Pokedex: Per mantenere il mio Pokedex ordinato, ho implementato la possibilità di eliminare i Pokemon salvati. Inoltre, sfrutto il local storage per assicurarmi che i miei Pokemon rimangano al sicuro anche durante un refresh del browser.
+
+## Tecnologie Utilizzate
+
+- Vue 3: Il cuore della mia web app, con la sua facilità d'uso e potenza nella gestione del DOM.
+  
+- PokeAPI: Un grazie speciale a PokeAPI per fornire un'enorme quantità di dati sui Pokemon.
+  
+- Local Storage: Per garantire che i miei Pokemon preferiti non vadano persi quando chiudo il browser.
+  
